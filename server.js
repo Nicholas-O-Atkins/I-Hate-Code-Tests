@@ -1,18 +1,24 @@
 const express = require('express')
 const articleRouter = require('./routes/articles')
+const mongoose = require('mongoose')
 const app = express()
+
+mongoose.connect('mongodb://localhost/blog', {
+})
 
 app.set('view engine', 'ejs')
 
-app.use('/articles', articleRouter)
+app.use(express.urlencoded({extended:false}))
 
 app.get('/', (req, res) =>{
     const articles = [{
         title: 'Test Title',
-        createdAt: Date.now(),
+        createdAt: new Date(),
         description: 'Test Descript'
     }]
-    res.render('index', {articles: articles})
+    res.render('articles/index', {articles: articles})
 })
+
+app.use('/articles', articleRouter)
 
 app.listen(5000)
