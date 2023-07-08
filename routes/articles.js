@@ -9,7 +9,7 @@ router.get('/new', (req, res) =>{
 router.get('/:slug', async (req, res) => {
     const article = await Article.findOne({ slug: req.params.slug })
     if (article == null) res.redirect('/')
-    res.render('/show', {article: article})
+    res.render('articles/show', {article: article})
 })
 
 router.post('/', async (req, res) => {
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
 
     try{
         await article.save()
-        res.redirect(`/articles/${article.slug}`)
+        res.redirect(`articles/${article.slug}`)
     } catch (e){
         console.log(e)
         res.render('articles/new', { article: article })
