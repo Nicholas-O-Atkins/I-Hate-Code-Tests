@@ -3,13 +3,13 @@ const Article = require('./../models/article')
 const router = express.Router()
 
 router.get('/new', (req, res) =>{
-    res.render('articles/new', {article: new Article()})
+    res.render('articles/new', { article: new Article() })
 })
 
-router.get('/:slug', async (res, req) => {
-    const article = await Article.find({ slug: req.params.slug })
+router.get('/:slug', async (req, res) => {
+    const article = await Article.findOne({ slug: req.params.slug })
     if (article == null) res.redirect('/')
-    res.render('/articles/show', {article: article})
+    res.render('/show', {article: article})
 })
 
 router.post('/', async (req, res) => {
@@ -24,8 +24,12 @@ router.post('/', async (req, res) => {
         res.redirect(`/articles/${article.slug}`)
     } catch (e){
         console.log(e)
-        res.render('articles/new', {article: article})
+        res.render('articles/new', { article: article })
     }
 })
+
+function saveArticleAndRedirect(path) {
+    return async (req, res)
+}
 
 module.exports = router
