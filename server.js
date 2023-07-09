@@ -6,15 +6,16 @@ const app = express()
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-    res.render('articles/index', [{
+    const articles = [{
         title: "Test",
-        createdAt: Date.now,
+        createdAt: new Date(),
         description: "Test desc"
     },{
         title: "Test2",
-        createdAt: Date.now,
+        createdAt: new Date(),
         description: "Test desc 2" 
-    }])
+    }]
+    res.render('articles/index', { articles: articles })
 })
 
 app.use('/articles', articleRouter)
