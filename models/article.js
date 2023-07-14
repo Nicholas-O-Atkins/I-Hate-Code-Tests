@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
-const marked = require('marked')
+const marked = require('marked', {
+    mangle: false,
+    headerIds: false
+})
 const slugify = require('slugify')
 const createDomPurify = require('dompurify')
 const { JSDOM } = require('jsdom')
