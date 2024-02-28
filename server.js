@@ -2,11 +2,16 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 // Declare the routers and models
+// Articles
 const Article = require('./models/article')
 const articleRouter = require('./routes/articles')
+// Assets
 
-const Recipe = require('./models/recipe')
-const recipeRouter = require('./routes/recipes')
+// Audits
+
+// Releases
+
+// Page Errors
 
 // Method overrides
 const methodOverride = require('method-override')
@@ -29,7 +34,7 @@ app.get('/', async (req, res) => {
     res.render('articles/index', { articles: articles })
 })
 
+// Routers
 app.use('/articles', articleRouter)
-app.use('/recipes', recipeRouter)
 
 app.listen(5000)
